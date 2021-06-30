@@ -11,10 +11,10 @@ class SubstringHighlight extends StatelessWidget {
     @required this.text,
     @required this.terms,
     this.textStyle = const TextStyle(
-      color: Colors.black,
+      // color: Colors.black,
     ),
     this.textStyleHighlight = const TextStyle(
-      color: Colors.red,
+      color: Color(0xff3cdaac),
     ),
   });
 

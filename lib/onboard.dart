@@ -158,7 +158,17 @@ class _OnboardingHomeState extends State<OnboardingHome> {
           fontFamily: 'Quicksand',
         ),
       ),
+      next: Text(
+        "Next",
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
+          fontFamily: 'Quicksand',
+          color: Color(0xff3cdaac),
+        ),
+      ),
       dotsDecorator: DotsDecorator(
+        spacing: EdgeInsets.symmetric(horizontal: 3),
         activeColor: Color(0xff9316ee),
       ),
     ));

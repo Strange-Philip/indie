@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.8),
+                  SizedBox(height: 500),
                   Center(
                     child: Text("Your Virtual friend",
                         style: TextStyle(

@@ -6,6 +6,7 @@ import 'package:indie/speechapi.dart';
 import 'package:indie/substring.dart';
 import 'package:indie/utils.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,14 +22,31 @@ void customLaunch(command) async {
   }
 }
 
+String greetingMessage() {
+  var timeNow = DateTime.now().hour;
+
+  if (timeNow <= 12) {
+    return 'Good Morning, please tap on the button and start speaking';
+  } else if ((timeNow > 12) && (timeNow <= 16)) {
+    return 'Good Afternoon, please tap on the button and start speaking';
+  } else if ((timeNow > 16) && (timeNow < 20)) {
+    return 'Good Evening, please tap on the button and start speaking';
+  } else {
+    return 'Sweet dreams, any last requests?';
+  }
+}
+
 class _HomePageState extends State<HomePage> {
-  String text = 'Press the button and start speaking';
   bool isListening = false;
 
+  String greetingMes = greetingMessage();
+
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: false,
           backgroundColor: Color(0xff9316ee),
           elevation: 0,
           title: Text(
@@ -46,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => IconButton(
                 icon: Icon(LineIcons.copy),
                 onPressed: () async {
-                  await FlutterClipboard.copy(text);
+                  await FlutterClipboard.copy(greetingMes);
 
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     elevation: 0,
@@ -60,21 +78,21 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color(0xff3cdaac),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+        drawer: Container(
+          width: MediaQuery.of(context).size.width * 0.75,
+          child: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Color(0xff3cdaac),
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        radius: 25,
+                        radius: 40,
                         backgroundImage: AssetImage('images/logo.jpg'),
                       ),
                       Spacer(),
@@ -82,99 +100,66 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-              ),
-              // ListTile(
-              //   selectedTileColor: Color(0xff9316ee).withOpacity(0.5),
-              //   title: Text(
-              //     'Theme',
-              //     style: TextStyle(
-              //         // color: Colors.black,
-              //         fontSize: 18,
-              //         fontFamily: 'Quicksand'),
-              //   ),
-              //   leading: Icon(
-              //     EasyDynamicTheme.of(context).themeMode == ThemeMode.light
-              //         ? LineIcons.moon
-              //         : LineIcons.sun,
-              //     // color: Colors.black,
-              //   ),
-              //   // trailing: ChangeThemeButton(),
-              //   trailing: EasyDynamicThemeSwitch(),
-              //   onTap: () {
-              //     // Navigator.pop(context);
-              //   },
-              // ),
-              ListTile(
-                selectedTileColor: Color(0xff9316ee).withOpacity(0.5),
-                title: Text(
-                  'Contact Developer',
-                  style: TextStyle(
-                      // color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: 'Quicksand'),
+                ListTile(
+                  selectedTileColor: Color(0xff9316ee).withOpacity(0.5),
+                  title: Text(
+                    'Contact Developer',
+                    style: TextStyle(
+                        // color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Quicksand'),
+                  ),
+                  leading: Icon(
+                    LineIcons.envelope,
+                    // color: Colors.black,
+                  ),
+                  onTap: () {
+                    customLaunch(
+                        'mailto:philipabakahmensah@gmail.com?subject=Indie&body=');
+                    Navigator.pop(context);
+                  },
                 ),
-                leading: Icon(
-                  LineIcons.envelope,
-                  // color: Colors.black,
+                ListTile(
+                  selectedTileColor: Color(0xff9316ee).withOpacity(0.5),
+                  title: Text(
+                    'Help & feedback',
+                    style: TextStyle(
+                        // color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Quicksand'),
+                  ),
+                  leading: Icon(
+                    LineIcons.questionCircle,
+                    // color: Colors.black,
+                  ),
+                  onTap: () {
+                    customLaunch(
+                        'mailto:philipabakahmensah@gmail.com?subject=Indie&body=');
+                    Navigator.pop(context);
+                  },
                 ),
-                onTap: () {
-                  customLaunch(
-                      'mailto:philipabakahmensah@gmail.com?subject=Indie&body=');
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                selectedTileColor: Color(0xff9316ee).withOpacity(0.5),
-                title: Text(
-                  'Help & feedback',
-                  style: TextStyle(
-                      // color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: 'Quicksand'),
-                ),
-                leading: Icon(
-                  LineIcons.questionCircle,
-                  // color: Colors.black,
-                ),
-                onTap: () {
-                  customLaunch(
-                      'mailto:philipabakahmensah@gmail.com?subject=Indie&body=');
-                  Navigator.pop(context);
-                },
-              ),
-              Center(
-                  child: Text('Developed by • Philip',
-                      style: TextStyle(
-                        fontFamily: 'Quicksand',
-                        fontSize: 14,
-                      ))),
-              ListTile(
-                title: Text('Item 1'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+                Center(
+                    child: Text('Developed by • Philip',
+                        style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          fontSize: 14,
+                        ))),
+              ],
+            ),
           ),
         ),
         body: SingleChildScrollView(
           reverse: true,
-          padding: const EdgeInsets.all(30).copyWith(bottom: 150),
+          padding: const EdgeInsets.all(20).copyWith(bottom: 150),
           child: SubstringHighlight(
-            text: text,
+            text: greetingMes,
             terms: Command.all,
             textStyle: TextStyle(
-              fontSize: 32.0,
+              fontSize: 28.0,
               fontWeight: FontWeight.w400,
             ),
             textStyleHighlight: TextStyle(
-              fontSize: 32.0,
+              fontSize: 28.0,
               color: Color(0xff3cdaac),
               fontWeight: FontWeight.w400,
             ),
@@ -187,21 +172,23 @@ class _HomePageState extends State<HomePage> {
           glowColor: Color(0xff3cdaac),
           child: FloatingActionButton(
             child: Icon(
-                isListening ? LineIcons.microphone : LineIcons.microphoneSlash,
+                isListening ? LineIcons.microphoneSlash : LineIcons.microphone,
                 size: 36),
             onPressed: toggleRecording,
           ),
         ),
-      );
+      ),
+    );
+  }
 
   Future toggleRecording() => SpeechApi.toggleRecording(
-        onResult: (text) => setState(() => this.text = text),
+        onResult: (text) => setState(() => this.greetingMes = text),
         onListening: (isListening) {
           setState(() => this.isListening = isListening);
 
           if (!isListening) {
             Future.delayed(Duration(seconds: 1), () {
-              Utils.scanText(text);
+              Utils.scanText(greetingMes);
             });
           }
         },
