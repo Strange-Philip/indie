@@ -96,7 +96,16 @@ class _HomePageState extends State<HomePage> {
                         backgroundImage: AssetImage('images/logo.jpg'),
                       ),
                       Spacer(),
-                      EasyDynamicThemeBtn()
+                      Padding(
+                        padding: const EdgeInsets.only(top:10),
+                        child: Icon(
+                          EasyDynamicTheme.of(context).themeMode ==
+                                  ThemeMode.light
+                              ? LineIcons.moon
+                              : LineIcons.sun,
+                        ),
+                      ),
+                      EasyDynamicThemeSwitch()
                     ],
                   ),
                 ),
