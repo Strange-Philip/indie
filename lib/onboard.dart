@@ -31,7 +31,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w600),
                 bodyTextStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Quicksand',
                 ))),
@@ -51,7 +51,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w600),
                 bodyTextStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Quicksand',
                 ))),
@@ -71,7 +71,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w600),
                 bodyTextStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Quicksand',
                 ))),
@@ -91,17 +91,17 @@ class _OnboardingHomeState extends State<OnboardingHome> {
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w600),
                 bodyTextStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Quicksand',
                 ))),
         PageViewModel(
-            title: "Email Commands",
+            title: "Email and Sms",
             image: SvgPicture.asset(
               "images/Speech to text-pana.svg",
             ),
             body:
-                "Say Email and add the email address of the reciever and we take you to directly email the person",
+                "Say Email and add the email address of the reciever and we take you to directly email the person. Say Text and add the number to send an sms message to the person.",
             decoration: PageDecoration(
                 pageColor: Colors.white,
                 imagePadding: EdgeInsets.all(50),
@@ -111,7 +111,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w600),
                 bodyTextStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Quicksand',
                 ))),
@@ -131,7 +131,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w600),
                 bodyTextStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Quicksand',
                 ))),
